@@ -1,32 +1,32 @@
 package io.mygdx.soulknight;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class SoulKnightGame extends ApplicationAdapter {
-    private SpriteBatch batch;
-    private Texture image;
+import io.mygdx.soulknight.screens.GameScreen;
+
+/**
+ * SoulKnightGame — application entry point.
+ *
+ * Owns the single shared SpriteBatch (expensive to create; one per app).
+ * Delegates all rendering to the active Screen.
+ */
+public class SoulKnightGame extends Game {
+
+    // Shared across all screens — created once, disposed once
+    public SpriteBatch batch;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
-    }
-
-    @Override
-    public void render() {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        batch.begin();
-        batch.draw(image, 140, 210);
-        batch.end();
+        // Start directly on the GameScreen for now
+        // Phase 5 will introduce a MainMenuScreen here instead
+        setScreen(new GameScreen(batch));
     }
 
     @Override
     public void dispose() {
+        super.dispose();   // disposes the active screen
         batch.dispose();
-        image.dispose();
     }
 }
