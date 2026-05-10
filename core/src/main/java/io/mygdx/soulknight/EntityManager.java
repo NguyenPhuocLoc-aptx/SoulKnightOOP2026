@@ -1,7 +1,7 @@
 package io.mygdx.soulknight;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Holds and updates all game objects (players, enemies, bullets, …).
@@ -26,15 +26,21 @@ public class EntityManager {
                 for (int j = 0; j < entities.size; j++) {
                     Entity target = entities.get(j);
                     if (target instanceof Enemy && b.isAlive()
-                            && b.collidesWith((Enemy) target)) {
+                        && b.collidesWith((Enemy) target)) {
                         ((Enemy) target).takeDamage(b.getDamage());
                         b.destroy();
                     }
                 }
             }
         }
-        // Remove dead entities (bullets that hit or enemies that died)
-        entities.removeIf(e -> !e.isAlive());
+
+        // ----- XÓA CÁC THỰC THỂ ĐÃ CHẾT -----
+        // Duyệt ngược để an toàn khi gọi removeIndex(i)
+        for (int i = entities.size - 1; i >= 0; i--) {
+            if (!entities.get(i).isAlive()) {
+                entities.removeIndex(i);
+            }
+        }
     }
 
     /** Render all entities. */
