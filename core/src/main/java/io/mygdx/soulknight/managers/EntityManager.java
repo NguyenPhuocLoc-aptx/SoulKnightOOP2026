@@ -1,7 +1,11 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.managers;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import io.mygdx.soulknight.entities.Bullet;
+import io.mygdx.soulknight.entities.Enemy;
+import io.mygdx.soulknight.entities.Entity;
+import io.mygdx.soulknight.entities.Player;
 
 /**
  * Holds and updates all game objects (players, enemies, bullets, …).

@@ -1,9 +1,13 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import io.mygdx.soulknight.utils.Assets;
+import io.mygdx.soulknight.weapons.Pistol;
+import io.mygdx.soulknight.weapons.Shotgun;
+import io.mygdx.soulknight.weapons.Weapon;
 
 /**
  * Handles movement, health and weapon handling.

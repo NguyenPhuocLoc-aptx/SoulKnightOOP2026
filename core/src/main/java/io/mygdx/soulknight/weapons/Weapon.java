@@ -1,4 +1,8 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.weapons;
+
+import io.mygdx.soulknight.entities.Bullet;
+import io.mygdx.soulknight.entities.Player;
+import io.mygdx.soulknight.managers.EntityManagerHolder;
 
 /**
  * Base class for all weapons. Handles cooldown and firing logic.

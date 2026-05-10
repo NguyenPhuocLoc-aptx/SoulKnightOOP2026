@@ -1,4 +1,4 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

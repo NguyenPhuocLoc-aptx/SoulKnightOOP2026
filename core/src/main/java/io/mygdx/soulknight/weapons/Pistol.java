@@ -1,4 +1,6 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.weapons;
+
+import io.mygdx.soulknight.entities.Player;
 
 /**
  * Fast, single‑shot weapon.

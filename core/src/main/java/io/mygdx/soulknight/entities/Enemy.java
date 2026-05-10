@@ -1,9 +1,9 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import io.mygdx.soulknight.utils.Assets;
 
 /**
  * Very simple AI: constantly moves toward the player.

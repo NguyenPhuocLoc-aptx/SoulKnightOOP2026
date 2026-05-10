@@ -1,4 +1,4 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.managers;
 
 /**
  * Simple singleton holder so weapons can add bullets without passing a reference

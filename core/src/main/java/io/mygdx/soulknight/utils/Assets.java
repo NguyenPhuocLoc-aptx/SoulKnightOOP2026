@@ -1,4 +1,4 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

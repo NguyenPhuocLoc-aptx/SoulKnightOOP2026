@@ -1,4 +1,6 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.weapons;
+
+import io.mygdx.soulknight.entities.Player;
 
 /**
  * Slow, spread weapon that fires multiple pellets per shot.

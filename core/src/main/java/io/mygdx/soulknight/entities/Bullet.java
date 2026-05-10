@@ -1,9 +1,9 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import io.mygdx.soulknight.utils.Assets;
 
 /**
  * Simple projectile that moves in a straight line and disappears after a timeout.

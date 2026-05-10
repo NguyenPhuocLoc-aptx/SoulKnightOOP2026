@@ -3,6 +3,7 @@ package io.mygdx.soulknight;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import io.mygdx.soulknight.screens.PlayScreen;
 
 /**
  * Starts the LibGDX application and switches to the PlayScreen.

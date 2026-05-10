@@ -1,10 +1,17 @@
-package io.mygdx.soulknight;
+package io.mygdx.soulknight.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import io.mygdx.soulknight.*;
+import io.mygdx.soulknight.entities.Enemy;
+import io.mygdx.soulknight.entities.Entity;
+import io.mygdx.soulknight.entities.Player;
+import io.mygdx.soulknight.managers.EntityManager;
+import io.mygdx.soulknight.managers.EntityManagerHolder;
+import io.mygdx.soulknight.utils.Assets;
 
 
 public class PlayScreen extends ScreenAdapter {
