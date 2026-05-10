@@ -6,9 +6,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-/**
- * Core game loop: updates & renders entities, handles input.
- */
+
 public class PlayScreen extends ScreenAdapter {
 
     private final GameMain game;
@@ -48,7 +46,7 @@ public class PlayScreen extends ScreenAdapter {
     public void render(float delta) {
         handleInput();
 
-        // ----- UPDATE --------------------------------------------------
+        // ----- UPDATE ---------------
         entityManager.updateAll(delta, player);
 
         // Enemies need the player reference to chase
@@ -58,7 +56,7 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
 
-        // ----- RENDER -------------------------------------------------
+        // ----- RENDER ---------------
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
@@ -73,7 +71,7 @@ public class PlayScreen extends ScreenAdapter {
         batch.end();
     }
 
-    /** Handles movement, firing and weapon switching. */
+
     private void handleInput() {
         // --- PLAYER MOVEMENT (WASD) ------------------------------------
         float dx = 0, dy = 0;
@@ -96,7 +94,7 @@ public class PlayScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        camera.setToOrthographic(false, width, height);
+        camera.setToOrtho(false, width, height);
     }
 
     @Override
