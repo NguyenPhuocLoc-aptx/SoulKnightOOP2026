@@ -19,6 +19,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import io.mygdx.soulknight.SoulKnightGame;
 
 public class GameOverScreen implements Screen {
+    private static final float WORLD_WIDTH = 1600f;
+    private static final float WORLD_HEIGHT = 900f;
+
+    private final OrthographicCamera camera = new OrthographicCamera();
     private final Viewport viewport;
     private final Stage stage;
 
@@ -31,7 +35,7 @@ public class GameOverScreen implements Screen {
 
     public GameOverScreen(Game game){
         this.game = game;
-        viewport = new FitViewport(SoulKnightGame.V_WIDTH, SoulKnightGame.V_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         stage = new Stage(viewport, ((SoulKnightGame) game).batch);
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
@@ -56,7 +60,12 @@ public class GameOverScreen implements Screen {
 
         spriteBatch = new SpriteBatch();
         textureGO = new Texture("game-over-typography-pic-1600x900.jpg");
-        spriteGO = new Sprite(textureGO, 0, 0, 1600, 900);
+        spriteGO = new Sprite(textureGO);
+
+        camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
+        viewport.apply();
+        spriteGO.setSize(WORLD_WIDTH, WORLD_HEIGHT);
+        spriteGO.setPosition(0f, 0f);
     }
 
     @Override
@@ -74,6 +83,9 @@ public class GameOverScreen implements Screen {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        viewport.apply();
+        spriteBatch.setProjectionMatrix(camera.combined);
 
         spriteBatch.begin();
         spriteGO.draw(spriteBatch);
