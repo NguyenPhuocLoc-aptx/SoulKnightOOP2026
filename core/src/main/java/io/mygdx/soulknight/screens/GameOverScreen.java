@@ -19,11 +19,15 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import io.mygdx.soulknight.SoulKnightGame;
 
 public class GameOverScreen implements Screen {
-    private Viewport viewport;
-    private Stage stage;
+    private final Viewport viewport;
+    private final Stage stage;
 
-    private Game game;
-    private Music music;
+    private final Game game;
+    private final Music music;
+
+    private final SpriteBatch spriteBatch;
+    private final Texture textureGO;
+    private final Sprite spriteGO;
 
     public GameOverScreen(Game game){
         this.game = game;
@@ -38,7 +42,7 @@ public class GameOverScreen implements Screen {
         Label gameOverLabel = new Label("GAME OVER", font);
         Label playAgainLabel = new Label("Click to Play Again", font);
 
-        table.add(new Label("", font)).expandX();
+        table.add(gameOverLabel).expandX();
         table.row();
         table.add(new Label("", font)).expandX();
         table.row();
@@ -49,6 +53,10 @@ public class GameOverScreen implements Screen {
         music = SoulKnightGame.manager.get("audio/music/LivingRoom.mp3", Music.class);
         music.setLooping(true);
         music.play();
+
+        spriteBatch = new SpriteBatch();
+        textureGO = new Texture("game-over-typography-pic-1600x900.jpg");
+        spriteGO = new Sprite(textureGO, 0, 0, 1600, 900);
     }
 
     @Override
@@ -61,15 +69,11 @@ public class GameOverScreen implements Screen {
         if(Gdx.input.justTouched()){
             music.stop();
             game.setScreen(new PlayScreen((SoulKnightGame) game));
-            //dispose();
+            dispose();
         }
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        SpriteBatch spriteBatch = new SpriteBatch();
-        Texture textureGO = new Texture("game-over-typography-pic-1600x900.jpg");
-        Sprite spriteGO = new Sprite(textureGO, 0, 0, 1600, 900);
 
         spriteBatch.begin();
         spriteGO.draw(spriteBatch);
@@ -80,7 +84,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width, height, true);
     }
 
     @Override
@@ -102,5 +106,7 @@ public class GameOverScreen implements Screen {
     public void dispose() {
         music.dispose();
         stage.dispose();
+        spriteBatch.dispose();
+        textureGO.dispose();
     }
 }

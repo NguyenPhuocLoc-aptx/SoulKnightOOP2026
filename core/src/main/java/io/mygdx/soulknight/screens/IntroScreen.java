@@ -15,14 +15,14 @@ import io.mygdx.soulknight.SoulKnightGame;
 
 public class IntroScreen implements Screen {
 
-    private Game game;
-    private Music music;
-    private OrthographicCamera camera;
-    private Viewport viewport;
+    private final Game game;
+    private final Music music;
+    private final OrthographicCamera camera;
+    private final Viewport viewport;
 
-    SpriteBatch spriteBatch = new SpriteBatch();
-    Texture textureGO = new Texture("Menu.PNG");
-    Sprite spriteGO = new Sprite(textureGO, 0, 0, 1600, 900);
+    private final SpriteBatch spriteBatch = new SpriteBatch();
+    private final Texture textureGO = new Texture("Menu.PNG");
+    private final Sprite spriteGO = new Sprite(textureGO, 0, 0, 1600, 900);
 
     public IntroScreen(Game game){
         this.game = game;
@@ -56,8 +56,6 @@ public class IntroScreen implements Screen {
         spriteBatch.begin();
         spriteGO.draw(spriteBatch);
         spriteBatch.end();
-
-
     }
 
     @Override
@@ -82,6 +80,5 @@ public class IntroScreen implements Screen {
 
     @Override
     public void dispose() {
-
     }
 }

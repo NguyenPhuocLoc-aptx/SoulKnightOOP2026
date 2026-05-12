@@ -6,8 +6,8 @@ import io.mygdx.soulknight.Tools.Contactable;
 import io.mygdx.soulknight.Tools.Info;
 
 public class WinArea implements Contactable {
-    private Info info;
-    private PlayScreen playScreen;
+    private final Info info;
+    private final PlayScreen playScreen;
 
     public WinArea(World world, PlayScreen playScreen){
 

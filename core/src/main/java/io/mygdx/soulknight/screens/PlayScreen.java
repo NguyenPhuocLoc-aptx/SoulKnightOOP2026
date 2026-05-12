@@ -1,4 +1,5 @@
 package io.mygdx.soulknight.screens;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -27,33 +28,29 @@ import io.mygdx.soulknight.Tools.WorldContactListener;
 import java.util.ArrayList;
 
 public class PlayScreen implements Screen {
-    private SoulKnightGame game;
-    // load images from TexturePacker
-    private TextureAtlas atlas;
+    private final SoulKnightGame game;
 
     //  viewport
     private static OrthographicCamera camera;
-    private Viewport gamePort;
-    private Hud hud;
+    private final Viewport gamePort;
+    private final Hud hud;
 
-    private TmxMapLoader mapLoader; // load map tmx to the game
-    private TiledMap map; // reference to the map
-    private OrthogonalTiledMapRenderer renderer; // render the map to screen
+    private final TiledMap map; // reference to the map
+    private final OrthogonalTiledMapRenderer renderer; // render the map to screen
 
     //    create box2d world, b2s variables
-    private World world;
-    private Box2DDebugRenderer b2dr;
-    private Player player;
-    private Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-    private WorldContactListener worldContactListener;
-    private static ArrayList<Body> bodiesToDestroy = new ArrayList();
+    private final World world;
+    private final Box2DDebugRenderer b2dr;
+    private final Player player;
+    private final Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+    private static final ArrayList<Body> bodiesToDestroy = new ArrayList<>();
 
-    private Music music;
+    private final Music music;
     public boolean win = false;
 
     public PlayScreen(SoulKnightGame game){
         //put the String to the pack file of image package
-        atlas  = new TextureAtlas("Weapons.pack"); //adding weapons pack
+        TextureAtlas atlas  = new TextureAtlas("Weapons.pack"); //adding weapons pack
         this.game = game;
 
         camera = new OrthographicCamera(); //create the camera that follow the knight
@@ -61,13 +58,13 @@ public class PlayScreen implements Screen {
         gamePort = new FitViewport(SoulKnightGame.V_WIDTH, SoulKnightGame.V_HEIGHT, camera);
         hud = new Hud(game.batch); //create HUD screen to display scores/timers/level
 
-        mapLoader = new TmxMapLoader();
+        TmxMapLoader mapLoader = new TmxMapLoader(); // load map tmx to the game
         map = mapLoader.load("map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
 
         camera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        // setup a non-gravitational environment, state remains still at first
+        // set up a non-gravitational environment, state remains still at first
         world = new World(new Vector2(0, 0), true);
         b2dr = new Box2DDebugRenderer();
 
@@ -84,7 +81,7 @@ public class PlayScreen implements Screen {
 
         hud.setPlayer(player);
 
-        worldContactListener = new WorldContactListener();
+        WorldContactListener worldContactListener = new WorldContactListener();
         world.setContactListener(worldContactListener);
 
         music = SoulKnightGame.manager.get("audio/music/Dungeon.mp3");
@@ -98,10 +95,6 @@ public class PlayScreen implements Screen {
         return camera;
     }
 
-    public static void addBodyToDestroy(Body body) {
-        bodiesToDestroy.add(body);
-    }
-
     public void update(float dt){
 //        take 1 step
         world.step(1/60f, 6, 2);
@@ -110,7 +103,7 @@ public class PlayScreen implements Screen {
         player.update(dt);
         Monster.updateAll(dt);
 
-//        attach gamecam to players.x coordinate, the camera move horizontally
+//        attach game camera to players.x coordinate, the camera move horizontally
         camera.position.x = player.b2body.getPosition().x;
 
         mousePos.x = Gdx.input.getX();
@@ -148,11 +141,8 @@ public class PlayScreen implements Screen {
 
             update(delta);
             Bullet.render();
-            //render Box2DDebugLines
-            //b2dr.render(world, camera.combined);
 
             hud.stage.draw();
-
             gameOver();
             win();
         }

@@ -11,8 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.mygdx.soulknight.SoulKnightGame;
 
 public class WinScreen implements Screen {
-    private Game game;
-    private Music music;
+    private final Game game;
+    private final Music music;
 
     SpriteBatch spriteBatch = new SpriteBatch();
     Texture textureGO = new Texture("Win.jpg");

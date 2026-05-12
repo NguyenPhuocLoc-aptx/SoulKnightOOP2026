@@ -15,47 +15,36 @@ import io.mygdx.soulknight.Tools.Info;
 public class Player extends Sprite implements Contactable {
     public World world;
     public Body b2body;
-    private OrthographicCamera camera;
-    private final Vector2 START_POS = new Vector2(100, 100);
+    private final OrthographicCamera camera;
     public static Vector2 currentPos;
 
-    private Vector3 mousePos;
+    private final Vector3 mousePos;
 
-    private SpriteBatch spriteBatch = new SpriteBatch();
-    private Texture texture = new Texture("Knight_Monster.png");
-    private Sprite sprite = new Sprite(texture, 91, 15, 16, 16);
+    private final SpriteBatch spriteBatch = new SpriteBatch();
+    private final Texture texture = new Texture("Knight_Monster.png");
+    private final Sprite sprite = new Sprite(texture, 91, 15, 16, 16);
 
-    private Info info;
+    private final Info info;
 
     private float timer;
     private final float ICD = 0.6f;
     private float ICDTimer;
     private boolean isAttacked = false;
-    //private final TextureRegion characterStand;
 
     public int health = 10;
     private float switchTimer = 0;
     private Gun currentGun;
-    private Pistol pistol = new Pistol();
-    private Shotgun shotgun = new Shotgun();
-
-    //Movement variables
-    private final float SPEED_ACCELERATION = 16f;
-    private final float MAX_SPEED = 85f;
-
+    private final Pistol pistol = new Pistol();
+    private final Shotgun shotgun = new Shotgun();
 
     public boolean gameOver = false;
 
     public Player (World world, Vector3 mousePos, OrthographicCamera camera){
-        //super(screen.getAtlas().findRegion("KnightTexture"));
         this.world = world;
         this.mousePos = mousePos;
         this.camera = camera;
 
         defineCharacter();
-        //setup character size
-        //characterStand = new TextureRegion(getTexture(),0,0,1, 73);
-        //setRegion(characterStand);
 
         info = new Info("player");
 
@@ -80,24 +69,25 @@ public class Player extends Sprite implements Contactable {
     }
 
     public void defineCharacter(){
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(START_POS);
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        b2body = world.createBody(bdef);
+        final Vector2 START_POS = new Vector2(100, 100);
+
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.set(START_POS);
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        b2body = world.createBody(bodyDef);
         currentPos = b2body.getWorldCenter();
 
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef fixtureDef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(7);
 
-        fdef.shape = shape;
-        fdef.filter.categoryBits = 2;
+        fixtureDef.shape = shape;
+        fixtureDef.filter.categoryBits = 2;
 
-        b2body.createFixture(fdef).setUserData(this);
+        b2body.createFixture(fixtureDef).setUserData(this);
     }
 
     public void update(float dt) {
-//        set position for knight and body2box
         setPosition(b2body.getWorldCenter().x, b2body.getWorldCenter().y);
 
         if(!gameOver) {
@@ -119,9 +109,11 @@ public class Player extends Sprite implements Contactable {
         spriteBatch.end();
     }
 
-    //  setup the camera so that for each of the movement using W,A,S,D key
     //  the camera will follow the knight
     public void handleInput(){
+        final float SPEED_ACCELERATION = 16f;
+        final float MAX_SPEED = 85f;
+
         Vector2 currentSpeed = b2body.getLinearVelocity();
 
         boolean dKeyPressed = Gdx.input.isKeyPressed(Input.Keys.D);
@@ -192,10 +184,10 @@ public class Player extends Sprite implements Contactable {
         Info objInfo = object.getInfo();
 
         if(objInfo != null) {
-            if (objInfo.getType() == "monster")
+            if ("monster".equals(objInfo.getType()))
                 setAttacked(true);
 
-            if(objInfo.getType() == "enemyBullet")
+            if("enemyBullet".equals(objInfo.getType()))
                 healthUpdate(1);
         }
     }
@@ -205,7 +197,7 @@ public class Player extends Sprite implements Contactable {
         Info objInfo = object.getInfo();
 
         if(objInfo != null) {
-            if (objInfo.getType() == "monster")
+            if ("monster".equals(objInfo.getType()))
                 setAttacked(false);
         }
     }

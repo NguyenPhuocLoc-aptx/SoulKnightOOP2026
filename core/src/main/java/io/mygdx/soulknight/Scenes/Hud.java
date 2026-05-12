@@ -16,7 +16,7 @@ import io.mygdx.soulknight.Sprites.Player;
 // class Hud displays world time, onscreen-controller button, bullet capacity, health, warnings,...
 public class Hud implements Disposable {
     public Stage stage;
-    private Viewport viewport;
+    private final Viewport viewport;
     private Player player;
 
     // what should be display on the HUD screen
@@ -35,12 +35,9 @@ public class Hud implements Disposable {
         worldTimer = 666;
         timeCount = 0;
 
-//        setup HUD viewport using a new camera seperate from the gamecame (HUD screen remains still)
         viewport = new FitViewport(SoulKnightGame.V_WIDTH, SoulKnightGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-
-        // define a table to organize hud's labels: put all tracking information in one rectangle box
         Table table = new Table();
         table.top(); // display sprites at the top of the page
         table.setFillParent(true); // set the table to the size of the page

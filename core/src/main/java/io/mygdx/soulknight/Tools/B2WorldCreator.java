@@ -4,13 +4,12 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
-import io.mygdx.soulknight.Sprites.WinArea;
 
 public class B2WorldCreator implements Contactable{
-    private World world;
-    private TiledMap map;
+    private final World world;
+    private final TiledMap map;
 
-    private Info info = new Info("wall");
+    private final Info info = new Info("wall");
 
     public B2WorldCreator(World world, TiledMap map){
         this.world = world;
