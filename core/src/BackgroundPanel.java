@@ -12,7 +12,7 @@ public class BackgroundPanel extends JPanel {
         URL imageUrl = getClass().getResource(imagePath);
 
         if (imageUrl == null) {
-            System.out.println("Không tìm thấy ảnh: " + imagePath);
+            System.out.println("Image is not found: " + imagePath);
             return;
         }
 
