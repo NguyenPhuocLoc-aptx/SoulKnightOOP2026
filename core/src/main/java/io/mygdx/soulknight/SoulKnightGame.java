@@ -3,7 +3,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import io.mygdx.soulknight.screens.IntroScreen;
+import io.mygdx.soulknight.screens.MainMenuScreen;
 import io.mygdx.soulknight.screens.PlayScreen;
 
 public class SoulKnightGame extends Game {
@@ -25,7 +25,7 @@ public class SoulKnightGame extends Game {
 		manager.load("audio/sounds/PistolSound.mp3", Music.class);
 		manager.load("audio/sounds/ShotgunSound2.wav", Music.class);
 		manager.finishLoading();
-		setScreen(new IntroScreen(this));
+		setScreen(new MainMenuScreen(this));
 	}
 
 	@Override
