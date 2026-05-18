@@ -20,7 +20,7 @@ public class Lwjgl3Launcher {
 
         configuration.setTitle("Soul Knight test");
 
-        configuration.setWindowedMode(800, 600);
+        configuration.setWindowedMode(1110, 624);
 
         configuration.setWindowIcon("libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png");
 
