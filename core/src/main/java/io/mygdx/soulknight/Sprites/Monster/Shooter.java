@@ -28,7 +28,6 @@ public class Shooter extends Monster{
     public void update(float dt) {
         if(!isDead) {
             attack(dt);
-            render();
         }
     }
 

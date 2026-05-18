@@ -115,10 +115,22 @@ public abstract class Monster extends Sprite implements Contactable {
         monsters.removeIf(monster -> monster.destroyed);
     }
 
+    public static void renderAll() {
+        for(Monster monster : monsters) {
+            if (!monster.destroyed && !monster.setToDestroy) {
+                monster.render();
+            }
+        }
+    }
+
     public static void destroyAll(){
         for(Monster monster : monsters) {
             monster.setToDestroy = true;
         }
+    }
+
+    public static void clearAll(){
+        monsters.clear();
     }
 
     @Override

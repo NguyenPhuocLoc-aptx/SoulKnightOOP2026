@@ -24,7 +24,6 @@ public class Chaser extends Monster{
 
         if (!isDead) {
             chasePlayer();
-            render();
         }
     }
 

@@ -17,6 +17,7 @@ public class Player extends Sprite implements Contactable {
     public Body b2body;
     private final OrthographicCamera camera;
     public static Vector2 currentPos;
+    private final Vector2 startPos;
 
     private final Vector3 mousePos;
 
@@ -40,9 +41,14 @@ public class Player extends Sprite implements Contactable {
     public boolean gameOver = false;
 
     public Player (World world, Vector3 mousePos, OrthographicCamera camera){
+        this(world, mousePos, camera, new Vector2(100, 100));
+    }
+
+    public Player (World world, Vector3 mousePos, OrthographicCamera camera, Vector2 startPos){
         this.world = world;
         this.mousePos = mousePos;
         this.camera = camera;
+        this.startPos = new Vector2(startPos);
 
         defineCharacter();
 
@@ -69,10 +75,8 @@ public class Player extends Sprite implements Contactable {
     }
 
     public void defineCharacter(){
-        final Vector2 START_POS = new Vector2(100, 100);
-
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(START_POS);
+        bodyDef.position.set(startPos);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bodyDef);
         currentPos = b2body.getWorldCenter();
@@ -88,7 +92,8 @@ public class Player extends Sprite implements Contactable {
     }
 
     public void update(float dt) {
-        setPosition(b2body.getWorldCenter().x, b2body.getWorldCenter().y);
+        currentPos = b2body.getWorldCenter();
+        setPosition(currentPos.x, currentPos.y);
 
         if(!gameOver) {
             handleInput();
@@ -96,8 +101,6 @@ public class Player extends Sprite implements Contactable {
             takeDamage(dt);
             switchWeapon(dt);
         }
-
-        render();
     }
 
     public void render(){

@@ -19,6 +19,7 @@ public class WinScreen implements Screen {
 
     private final Game game;
     private final Music music;
+    private final int currentLevelIndex;
 
     private final OrthographicCamera camera = new OrthographicCamera();
     private final Viewport viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
@@ -27,8 +28,9 @@ public class WinScreen implements Screen {
     private final Texture textureGO = new Texture("Win.jpg");
     private final Sprite spriteGO = new Sprite(textureGO);
 
-    public WinScreen(Game game){
+    public WinScreen(Game game, int currentLevelIndex){
         this.game = game;
+        this.currentLevelIndex = currentLevelIndex;
 
         camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
         viewport.apply();
@@ -50,7 +52,12 @@ public class WinScreen implements Screen {
     public void render(float delta) {
         if(Gdx.input.justTouched()){
             music.stop();
-            game.setScreen(new PlayScreen((SoulKnightGame) game));
+            int nextLevelIndex = currentLevelIndex + 1;
+            if(nextLevelIndex < PlayScreen.getLevelCount()){
+                game.setScreen(new PlayScreen((SoulKnightGame) game, nextLevelIndex));
+            } else {
+                game.setScreen(new PlayScreen((SoulKnightGame) game, 0));
+            }
             dispose();
         }
 
