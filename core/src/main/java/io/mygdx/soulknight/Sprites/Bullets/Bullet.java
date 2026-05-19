@@ -103,6 +103,10 @@ public abstract class Bullet extends Sprite implements Contactable {
         }
     }
 
+    public static void clearAll(){
+        bullets.clear();
+    }
+
     @Override
     public void offContact(Contactable object) {
 
